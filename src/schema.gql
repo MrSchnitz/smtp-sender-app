@@ -1,0 +1,33 @@
+# ------------------------------------------------------
+# THIS FILE WAS AUTOMATICALLY GENERATED (DO NOT MODIFY)
+# ------------------------------------------------------
+
+"""Mail message model"""
+type Mail {
+  from: String!
+  id: ID!
+  subject: String!
+  text: String!
+  to: String!
+}
+
+input MailDTO {
+  from: String!
+  subject: String!
+  text: String!
+  to: String!
+}
+
+type MailSendDTO {
+  dbMessage: Mail
+  message: String!
+}
+
+type Mutation {
+  sendMail(mail: MailDTO!): MailSendDTO!
+}
+
+type Query {
+  mails: [Mail!]!
+  test: String!
+}
