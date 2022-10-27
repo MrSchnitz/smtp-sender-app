@@ -9,6 +9,7 @@ type Mail {
   subject: String!
   text: String!
   to: String!
+  userId: String!
 }
 
 input MailDTO {
@@ -16,6 +17,7 @@ input MailDTO {
   subject: String!
   text: String!
   to: String!
+  userId: String!
 }
 
 type MailSendDTO {
@@ -28,6 +30,6 @@ type Mutation {
 }
 
 type Query {
-  mails: [Mail!]!
+  mails(userId: String!): [Mail!]!
   test: String!
 }

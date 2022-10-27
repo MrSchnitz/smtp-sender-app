@@ -12,8 +12,8 @@ export class MailResolver {
     ) {}
 
     @Query(returns => [Mail])
-    async mails(): Promise<Mail[]> {
-        return this.mailService.getAllMails();
+    async mails(@Args("userId") userId: string): Promise<Mail[]> {
+        return this.mailService.getUserMails(userId);
     }
 
     @Query(returns => GraphQLString)
@@ -23,6 +23,7 @@ export class MailResolver {
 
     @Mutation(returns => MailSendDTO)
     async sendMail(@Args("mail") mailBody: MailDTO): Promise<MailSendDTO> {
+        console.log("HMMMM", mailBody)
         return this.mailService.sendMail(mailBody);
     }
 }

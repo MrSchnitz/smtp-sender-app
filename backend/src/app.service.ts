@@ -11,7 +11,7 @@ export class AppService {
 
   async sendTestMail(): Promise<string> {
     const mailConfig = {
-      from: "karel.skarpa@hmm.com",
+      from: "karel.skarpa@db-secret.yaml.com",
       to: "horst.jodler.schnitzel@gmail.com",
       subject: "TEST",
       template: "./text",

@@ -1,0 +1,13 @@
+version: "3.8"
+services:
+  smtp-app-frontend:
+    image: smtp-app-frontend:1.0.0
+    container_name: smtp-app-frontend
+    build:
+      context: .
+      dockerfile: Dockerfile
+    ports:
+      - 3000:3000
+    environment:
+      NEXT_PUBLIC_API_URL: http://smtp-app-backend:3001/graphql
+      NEXT_PUBLIC_API_CLIENT_URL: http://localhost:3001/graphql

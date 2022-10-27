@@ -1,29 +1,35 @@
 version: "3.8"
 services:
-  smtp-sender-app:
-    image: smtp-sender-app:1.0.0
-    container_name: smtp-app
-#    if image is not used
-#    build:
-#      context: .
-#      dockerfile: Dockerfile
+  smtp-app-backend:
+    image: smtp-app-backend:1.0.0
+    container_name: smtp-app-backend
+    #    if image is not used
+    build:
+      context: .
+      dockerfile: Dockerfile
     ports:
       - 3001:3001
     depends_on:
-      - postgres
+      - postgresdb
     env_file:
-      - .dev.env
-
-  postgres:
+      - .env
+    networks:
+      - smtp-app
+  postgresdb:
     image: postgres
-    container_name: smtp-app-postgres
+    container_name: postgres-smtp-app-db
     restart: always
     ports:
       - 5432:5432
     env_file:
       - .db.env
+    networks:
+      - smtp-app
     volumes:
-      - postgres:/var/lib/postgresql/data
+      - postgres-smtp-app-db:/var/lib/postgresql/data
 volumes:
-  postgres:
-    name: smtp-sender-db
+  postgres-smtp-app-db:
+    name: backend-db
+networks:
+  smtp-app:
+    driver: bridge

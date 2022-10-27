@@ -1,0 +1,53 @@
+version: "3.8"
+services:
+  smtp-app-frontend:
+    image: smtp-app-frontend:1.0.1
+    container_name: smtp-app-frontend
+    build:
+      context: ./frontend
+      dockerfile: Dockerfile
+    ports:
+      - 3000:3000
+    depends_on:
+      - smtp-app-backend
+      - postgresdb
+    environment:
+      NEXT_PUBLIC_API_URL: http://smtp-app-backend:3001/graphql
+      NEXT_PUBLIC_API_CLIENT_URL: http://localhost:3001/graphql
+#    env_file:
+#      - ./frontend/.env
+    networks:
+      - smtp-app
+  smtp-app-backend:
+    image: smtp-app-backend:1.0.0
+    container_name: smtp-app-backend
+    #    if image is not used
+    build:
+      context: ./backend
+      dockerfile: Dockerfile
+    ports:
+      - 3001:3001
+    depends_on:
+      - postgresdb
+    env_file:
+      - ./backend/.env
+    networks:
+      - smtp-app
+  postgresdb:
+    image: postgres
+    container_name: postgresdb
+    restart: always
+    ports:
+      - 5432:5432
+    env_file:
+      - ./backend/.db.env
+    networks:
+      - smtp-app
+    volumes:
+      - postgresdb:/var/lib/postgresql/data
+volumes:
+  postgresdb:
+    name: backend-db
+networks:
+  smtp-app:
+    driver: bridge

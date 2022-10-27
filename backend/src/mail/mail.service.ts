@@ -29,6 +29,7 @@ export class MailService {
 
       const mes = await this.prismaService.mail.create({ data: mailBody });
 
+      console.log("UFFF", mes)
       return {
         message: `Email sent success: ${res.response}.`,
         dbMessage: mes,
@@ -43,6 +44,14 @@ export class MailService {
   async getAllMails(): Promise<Mail[]> {
     try {
       return await this.prismaService.mail.findMany();
+    } catch (e) {
+      throw new NotFoundException(e);
+    }
+  }
+
+  async getUserMails(userId: string): Promise<Mail[]> {
+    try {
+      return await this.prismaService.mail.findMany({where: {userId: userId}})
     } catch (e) {
       throw new NotFoundException(e);
     }

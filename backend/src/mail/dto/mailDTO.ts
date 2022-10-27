@@ -13,4 +13,7 @@ export class MailDTO {
 
     @Field()
     text: string;
+
+    @Field()
+    userId: string;
 }

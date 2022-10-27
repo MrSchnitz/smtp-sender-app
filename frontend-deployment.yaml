@@ -1,0 +1,42 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: smtp-app-frontend-deployment
+  labels:
+    app: smtp-app-frontend-deployment
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: frontend
+  template:
+    metadata:
+      name: frontend
+      labels:
+        app: frontend
+    spec:
+      containers:
+        - name: smtp-app-frontend
+          image: smtp-app-frontend:1.0.0
+          ports:
+            - containerPort: 3000
+          env:
+            - name: NEXT_PUBLIC_API_URL
+              value: http://127.0.0.1:3001/graphql
+            - name: NEXT_PUBLIC_API_CLIENT_URL
+              value: http://127.0.0.1:3001/graphql
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: smtp-app-frontend-service
+  labels:
+    app: smtp-app-frontend-service
+spec:
+  type: LoadBalancer
+  ports:
+    - protocol: TCP
+      port: 3000
+      targetPort: 3000
+  selector:
+    app: frontend

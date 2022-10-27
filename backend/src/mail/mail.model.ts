@@ -16,4 +16,7 @@ export class Mail {
 
     @Field()
     text: string;
+
+    @Field()
+    userId: string;
 }

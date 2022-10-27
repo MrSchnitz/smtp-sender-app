@@ -1,0 +1,40 @@
+{
+  "name": "smtp-sender-frontend",
+  "private": true,
+  "scripts": {
+    "dev": "next dev",
+    "build": "next build",
+    "start": "next start",
+    "export": "next export",
+    "lint": "next lint"
+  },
+  "dependencies": {
+    "@apollo/client": "^3.5.6",
+    "daisyui": "^1.16.4",
+    "deepmerge": "^4.2.2",
+    "graphql": "^16.2.0",
+    "js-cookie": "^3.0.1",
+    "lodash": "^4.17.21",
+    "next": "12.0.7",
+    "react": "17.0.2",
+    "react-dom": "17.0.2",
+    "react-hook-form": "^7.22.5",
+    "react-icons": "^4.3.1",
+    "uuid": "^8.3.2"
+  },
+  "devDependencies": {
+    "@types/deepmerge": "^2.2.0",
+    "@types/js-cookie": "^3.0.1",
+    "@types/lodash": "^4.14.178",
+    "@types/node": "16.11.12",
+    "@types/react": "17.0.37",
+    "@types/uuid": "^8.3.3",
+    "autoprefixer": "^10.4.0",
+    "eslint": "8.4.1",
+    "eslint-config-next": "12.0.7",
+    "postcss": "^8.4.4",
+    "prettier": "^2.5.1",
+    "tailwindcss": "^3.0.1",
+    "typescript": "4.5.3"
+  }
+}
